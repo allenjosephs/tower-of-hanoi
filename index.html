@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="lib/css/normalize.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Amatic+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="lib/css/main.css">
+  <title>Tower of Hanoi</title>
+</head>
+<body>
+  <main>
+    <section class="play-area">
+      <section class="header-area">
+        <div id="title">Tower of Hanoi</div>
+        <div id="rules-area"><button id="rules-button" class="button">How to Play</button></div>
+      </section>
+      <section class="game-board-area">
+        <div class="game-board">
+          <div class="game-board-contents">
+            <div id="tower1" class="tower drop-zone"></div>
+            <div id="tower2" class="tower drop-zone"></div>
+            <div id="tower3" class="tower drop-zone"></div>
+          </div>
+        </div>
+      </section>
+      <section class="game-stats-area">
+        <div id="min-moves" class="stat">Min moves: <span id="min"></span></div>
+        <div id="move-count" class="stat">Move count: <span id="count"></span></div>
+        <!-- <div id="time-to-solve" class="stat">Approx. solve time: ~<span id="time"></span> minute(s)</div> -->
+      </section>
+      <section class="game-controls-area">
+        <!-- onkeydown return false will force usage of spinners -->
+        <div class="difficulty">Choose # of blocks: <span><input type="number" id="difficulty"  min="3" max="10" value="0" onkeydown="return false"></span>
+        </div>
+        <!-- <select id="difficulty" class="difficulty">
+          <option value="0" selected>Choose Block Count</option>
+          <option value="3">three - 3</option>
+          <option value="4">four - 4</option>
+          <option value="5">five - 5</option>
+          <option value="6">six - 6</option>
+          <option value="7">seven - 7</option>
+          <option value="8">eight - 8</option>
+          <option value="9">nine - 9</option>
+          <option value="10">ten - 10</option>
+        </select> -->
+        <button id="reset-button" class="button">Start Game</button>
+        <button id="solve-me" class="button">Solve Me!</button>
+      </section>
+      <section class="game-board-footer">
+        <!-- <button id="reset" class="button">Reset Game</button> -->
+      </section>
+    </section>
+  </main>
+  <div id="rules-modal" class="modal">
+    <div id="rules-modal-content" class="modal-content">
+      <div id="rules-modal-title" class="modal-title">How to Play</div>
+      <div id="rules-modal-msg" class="modal-msg">
+        <h1>Objective</h1>
+        <p>Move all blocks from the left-hand tower to the right-hand tower</p>
+        <h1>Rules</h1>
+        <ol>
+          <li>Only one block may be moved at a time</li>
+          <li>At no time can a larger block be placed on top of a smaller block</li>
+        </ol>
+        <h1>Gameplay</h1>
+          <ol>
+            <li>Choose number of blocks</li>
+            <li>Click "Start Game"</li>
+            <li>Move blocks by dragging from one tower to another</li>
+            <li>Drop blocks anywhere inside a valid 'drop zone'</li>
+            <li>Click "Reset Game" to start over</li>
+          </ol>
+      </div>
+      <div id="rules-modal-footer" class="modal-footer">
+        <button id="close-rules" class="button">Close</button>
+      </div>
+    </div>
+  </div>
+  <div id="win-modal" class="modal">
+    <div id="win-modal-content" class="modal-content">
+      <div id="win-modal-title" class="modal-title">Winner!</div>
+      <div id="win-modal-msg" class="modal-msg">
+        <h1 class="winner">Congratulations!</h1>
+      </div>
+      <div id="win-modal-footer" class="modal-footer">
+        <button id="close-win" class="button">Close</button>
+      </div>
+    </div>
+  </div>
+  <script src="lib/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,429 @@
+
+html {
+  /* font-size: 16px; */
+
+  /*
+    Tips from "Getting started with fluid typography: https://www.smashingmagazine.com/2016/05/fluid-typography/
+  */
+  /* font-size: 1vw; */
+  font-size: .75vw;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: black;
+  color: rgb(233, 227, 227);
+  font-family: 'Amatic SC', cursive, sans-serif;
+}
+
+.play-area {
+  height: 70vh;
+  width: 70vw;
+  min-width: 350px;
+  background: rgb(19, 18, 18);
+  border: 3px solid blue;
+  border-radius: 5px;
+  display: grid;
+  grid-template-rows: 10fr 65fr 10fr 10fr 10fr;
+  box-shadow: 3px 3px 30px 30px rgb(33, 36, 83), -3px -3px 30px 30px rgb(33, 36, 83);
+  justify-items: center;
+  align-items: center;
+}
+
+.header-area {
+  padding: 0 5%;
+  grid-row: 1;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: stretch;
+  text-align: center;
+  align-items: center;
+}
+
+#title {
+  font-size: 4em;
+  grid-column: 2;
+}
+
+#rules-area {
+  grid-column: 3;
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+.game-board-area {
+  grid-row: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.game-board {
+  /*This class is mainly to define a container which has a fixed aspect ratio */
+  /* aspect ratio settings */
+  position: relative;
+  width: 90%;
+  padding-top: 30%;
+}
+
+.game-board-contents {
+  /* This class is the game grid
+  (which is sized to fit 100% inside the game-board)
+  and will hold each tower */
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1px;
+}
+
+.tower {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: rgb(37, 37, 37);
+  margin: 20px;
+  transition: all .25s ease;
+  background-color: aqua;
+  border: 3px solid grey;
+  border-radius: 5px;
+
+}
+
+#tower1 {
+  grid-column: 1;
+}
+
+#tower2 {
+  grid-column: 2;
+}
+
+#tower3 {
+  grid-column: 3;
+}
+
+
+/* ///////////// START DRAG AND DROP STYLES //////////////*/
+.dragging {
+  opacity: .5;
+}
+
+.drop-zone {
+  opacity: 1;
+}
+
+.valid-drop-zone {
+  background-color: rgb(157, 248, 187);
+  border: 5px solid green;
+}
+
+.invalid-drop-zone {
+  background-color: rgb(253, 234, 234);
+  border: 5px solid red;
+}
+/* ///////////// END DRAG AND DROP STYLES //////////////*/
+
+.game-stats-area {
+  color: black;
+  grid-row: 3;
+  width: 90%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  background-image: linear-gradient(
+    to right,
+    greenyellow 15%,
+    yellow,
+    greenyellow 85%);
+  border: 3px solid grey;
+  border-radius: 5px;
+}
+
+.stat {
+  font-size: 2em;
+  letter-spacing: 2px;
+}
+
+#min-moves {
+  grid-column: 1;
+}
+
+#move-count {
+  grid-column: 2;
+}
+
+/* #time-to-solve {
+  grid-column: 3;
+} */
+
+.game-controls-area {
+  grid-row: 4;
+  width: 90%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
+  margin-top: 1%;
+}
+
+
+.difficulty {
+  grid-column: 1;
+  letter-spacing: .25rem;
+  color: rgb(190, 190, 190);
+  font-size: 2em;
+  align-content: center;
+  font-weight: 900;
+  background-color: rgb(37, 30, 30);
+  border-radius: 10px;
+  transition: all .25s ease;
+  min-width: 14%;
+  text-align: center;
+}
+
+/* Style the difficulty selector like the buttons */
+input[type='number'] {
+  color: white;
+  background-color: rgb(37, 30, 30);
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* Always display arrows in the number of blocks input */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    opacity: 1;
+}
+
+.disabled {
+  opacity: .5;
+}
+
+#reset-button {
+  grid-column: 1;
+}
+
+#solve-me-button {
+  grid-column: 1;
+}
+
+.game-board-footer {
+  grid-row: 5;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.block {
+  transition: background .5s;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1),
+      rgba(33, 129, 21, 1) 10%,
+      rgba(109, 155, 103, 0) 40%,
+      rgba(125, 158, 119, .1) 50%,
+      rgba(109, 155, 103, 0) 60%,
+      rgba(33, 129, 21, 1) 90%,
+      rgba(0, 0, 0, 1)),
+
+    linear-gradient(
+      to right,
+      rgba(23, 87, 15, 1),
+      rgba(33, 129, 21, 1) 10%,
+      rgba(109, 155, 103, 1) 40%,
+      rgba(125, 158, 119, 1) 50%,
+      rgba(109, 155, 103, 1) 60%,
+      rgba(33, 129, 21, 1) 90%,
+      rgba(23, 87, 15, 1));
+
+  height: 7%;
+  border-radius: 25px/5px;
+
+}
+
+.draggable:hover {
+  cursor: move;
+  border: 3px dotted black;
+  background: rgb(201, 198, 44);
+}
+
+.block:hover:not(.draggable) {
+  cursor: not-allowed;
+}
+
+.level10 {
+  width: 98%;
+}
+
+.level9 {
+  width: 88%;
+}
+
+.level8 {
+  width: 78%;
+}
+
+.level7 {
+  width: 68%;
+}
+
+.level6 {
+  width: 58%;
+}
+
+.level5 {
+  width: 48%;
+}
+
+.level4 {
+  width: 38%;
+}
+
+.level3 {
+  width: 28%;
+}
+
+.level2 {
+  width: 18%;
+}
+
+.level1 {
+  width: 8%
+}
+
+.button {
+  letter-spacing: .25rem;
+  color: rgb(190, 190, 190);
+  font-size: 2em;
+  font-weight: 900;
+  background-color: rgb(37, 30, 30);
+  border-radius: 10px;
+  transition: all .25s ease;
+}
+
+.button:hover {
+  background-color: rgb(253, 252, 252);
+  color: black;
+  cursor: pointer;
+}
+
+.modal {
+  background-color: rgba(0,0,0,0.75);
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+	overflow: auto;
+  display: none;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.modal-content {
+  background-color: rgba(0,0,0,0.95);
+  display: grid;
+  grid-template-rows: 1fr 5fr 1fr;
+  margin: 15vh;
+  border: 1px solid white;
+  padding: 10px;
+}
+
+.modal-title {
+  display: flex;
+  grid-row: 1;
+  font-size: 3em;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-msg {
+  font-family: 'Open Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  font-size: .9em;
+  grid-row: 2;
+  /* padding: 5%; */
+  justify-content: center;
+}
+
+h1 {
+  font-size: 1.5em;
+  color: yellow;
+}
+
+h1.winner {
+  font-size: 3em;
+}
+
+ol {
+  padding-left: 1em;
+}
+
+.modal-footer {
+  display: flex;
+  grid-row: 3;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-show {
+  display: flex;
+}
+
+/* @media screen and (min-width: 800px) {
+  html {
+    font-size: 1vw;
+  }
+} */
+
+/* @media all and (max-width: 900px), (max-height: 800px) {
+  .header-area {
+    font-size: 2em;
+  }
+
+  .msg-banner {
+    font-size: 1.5em;
+  }
+
+  .button {
+    height: 25px;
+    letter-spacing: 1px;
+    font-size: 1em;
+    border-radius: 5px;
+  }
+
+  .game-board-footer {
+    padding: 15px 0;
+  }
+
+  .game-board {
+    box-shadow: 0 0;
+    padding-top: 65%;
+    width: 65%;
+  }
+
+  .game-board-area {
+    padding: 0;
+
+  }
+} */
