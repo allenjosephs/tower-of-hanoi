@@ -96,6 +96,12 @@ body {
   margin: 20px;
   transition: all .25s ease;
   background-color: aqua;
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgb(0, 174, 255),
+      aqua 65%,
+      white 98%);
   border: 3px solid grey;
   border-radius: 5px;
 
